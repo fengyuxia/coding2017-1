@@ -15,7 +15,7 @@ public class StrutsTest {
 	@Test
 	public void testLoginActionSuccess() {
 		
-		String actionName = "com.coderising.action.LoginAction";
+		String actionName = "login";
         
 		Map<String,String> params = new HashMap<String,String>();
         params.put("name","test");
@@ -25,7 +25,7 @@ public class StrutsTest {
         View view  = Struts.runAction(actionName,params);        
         
         Assert.assertEquals("/jsp/homepage.jsp", view.getJsp());
-        Assert.assertEquals("login successful", view.getParameters().get("message"));
+        Assert.assertEquals("login successful", view.getParameters().get("Message"));
 	}
 
 	@Test
@@ -38,6 +38,34 @@ public class StrutsTest {
         View view  = Struts.runAction(actionName,params);        
         
         Assert.assertEquals("/jsp/showLogin.jsp", view.getJsp());
-        Assert.assertEquals("login failed,please check your user/pwd", view.getParameters().get("message"));
+        Assert.assertEquals("login failed,please check your user/pwd", view.getParameters().get("Message"));
+	}
+	@Test
+	public void testLogoutActionSuccess() {
+		
+		String actionName = "logout";
+        
+		Map<String,String> params = new HashMap<String,String>();
+        params.put("name","test");
+        params.put("password","1234");
+        
+        
+        View view  = Struts.runAction(actionName,params);        
+        
+        Assert.assertEquals("/jsp/welcome.jsp", view.getJsp());
+        Assert.assertEquals("login successful", view.getParameters().get("Message"));
+	}
+
+	@Test
+	public void testLogoutActionFailed() {
+		String actionName = "logout";
+		Map<String,String> params = new HashMap<String,String>();
+        params.put("name","test");
+        params.put("password","123456"); //密码和预设的不一致
+        
+        View view  = Struts.runAction(actionName,params);        
+        
+        Assert.assertEquals("/jsp/error.jsp", view.getJsp());
+        Assert.assertEquals("login failed,please check your user/pwd", view.getParameters().get("Message"));
 	}
 }

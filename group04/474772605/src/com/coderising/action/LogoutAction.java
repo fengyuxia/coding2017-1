@@ -21,7 +21,7 @@ public class LogoutAction{
     public String execute(){
             if("test".equals(name) && "1234".equals(password)){
                 this.message = "login successful";
-                return "success1";
+                return "success";
             }
             this.message = "login failed,please check your user/pwd";
             return "fail";
